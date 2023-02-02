@@ -1,5 +1,6 @@
 import no_image from '../images/no-image.jpg';
 import { checkGenresById } from './checkGenresById.js';
+
 import { paginationMarkUp } from './pagination.js';
 
 const watchedLibBtn = document.querySelector('.js-watched-lib-btn');
@@ -18,14 +19,12 @@ window.addEventListener('load', function () {
   }, 0);
 });
 
-
 // Функція розпарсить об'єкти з localStorage
 function localStorageObject(key) {
   const getObjectFromLs = localStorage.getItem(key);
   const parseObjectFromLs = JSON.parse(getObjectFromLs);
-  // console.log(parseObjectFromLs);
 
-    if (!parseObjectFromLs) {
+  if (!parseObjectFromLs) {
     return emptyGalleryBox.classList.remove('is-hidden');
   } else {
     maxPage = Math.ceil(parseObjectFromLs.length / 20);
@@ -44,6 +43,7 @@ renderLibrary(watchedArray);
 watchedLibBtn.classList.add('btn-is-active');
 
 // Функція для рендуру розмітки
+
 export function renderLibrary(arrayMovies) {
   if (!arrayMovies || !arrayMovies.length) {
     clearMarkup();
@@ -71,9 +71,7 @@ export function renderLibrary(arrayMovies) {
            <div class="card-genre">${checkGenresById(obj)}</div>
          </div>
          <div class="card-year">
-
          ${obj.release_date.slice(0, 4) || obj.first_air_date.slice(0, 4) || ''}
-
          </div>
          <div class="card-rating-wraper"><div class="card-rating">${obj.vote_average.toFixed(
            1
@@ -117,6 +115,10 @@ export function onClickWatched(modalDel) {
 }
 
 export function onClickQueue(modalDel) {
+  emptyGalleryBox.classList.add('is-hidden');
+  queueLibBtn.classList.add('btn-is-active');
+  watchedLibBtn.classList.remove('btn-is-active');
+
   let arr = localStorage.getItem('QUEUE_LIST_DATA_KEY');
   let parsedArr = JSON.parse(arr);
 
