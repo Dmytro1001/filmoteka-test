@@ -1,0 +1,243 @@
+// <div class="card-wraper">
+//       <img class="card-img" src="#" alt="#" />
+//       <div class="card-title">title</div>
+//       <div class="wraper">
+//         <div class="card-genre-wraper">
+//           <div class="card-genre">genre</div>
+//         </div>
+//         <div class="card-year">year</div>
+//         <div class="card-rating-wraper"><div class="card-rating">rating</div></div>
+//       </div>
+//     </div>
+
+.card-wraper {
+  flex-wrap: wrap;
+  transition: transform 350ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  @media screen and (min-width: 320px) {
+    width: 280px;
+    height: 443px;
+  }
+
+  @media screen and (min-width: 768px) {
+    width: 336px;
+    height: 455px;
+  }
+
+  @media screen and (min-width: 1200px) {
+    width: 395px;
+    height: 574px;   
+  }
+}
+
+.card-img {  
+    filter: drop-shadow(1px 1px 1px rgba(55%, 55%, 55%, 0.4));
+    transition: transform 500ms cubic-bezier(0.4, 0, 0.2, 1);
+
+
+  @media screen and (min-width: 320px) {
+    width: 100%;
+    height: 398px;
+    margin-bottom: 8px;
+    border-radius: 5px;
+  }
+
+  @media screen and (min-width: 768px) {
+    height: 455px;
+    border-radius: 5px;
+  }
+
+  @media screen and (min-width: 1200px) {
+    height: 574px;
+    margin-bottom: 12px;
+    border-radius: 5px;
+  }
+}
+
+.card-title {
+  @media screen and (min-width: 320px) {
+    color: #000;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 16px;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  @media screen and (min-width: 1200px) {
+    font-size: 20px;
+    line-height: 24px;
+    height: 25px;
+  }
+}
+
+.wraper {
+  display: flex;
+  align-items: center;
+
+  @media screen and (min-width: 320px) {
+    color: #ff6b08;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 16px;
+  }
+
+  @media screen and (min-width: 1200px) {
+    font-size: 20px;
+    line-height: 24px;
+  }
+}
+
+.card-genre-wraper {
+  position: relative;
+}
+
+.card-genre::after {
+  position: absolute;
+  content: '';
+  border-radius: 2px;
+  background-color: #ff6b08;
+
+  @media screen and (min-width: 320px) {
+    width: 1px;
+    height: 10px;
+    right: -9px;
+    top: 4px;
+  }
+
+  @media screen and (min-width: 1200px) {
+    width: 2px;
+    height: 15px;
+    top: 5px;
+    right: -10px;
+  }
+}
+
+.card-year {
+  margin-left: 16px;
+}
+
+.card-rating-wraper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 8px;
+
+  @media screen and (min-width: 320px) {
+    background-color: #ff6b08;
+    border-radius: 5px;
+    width: 36px;
+    height: 16px;
+  }
+
+  @media screen and (min-width: 1200px) {
+    width: 40px;
+    height: 20px;
+    font-size: 20px;
+    line-height: 24px;
+  }
+}
+.card-rating {
+  color: #fff;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @media screen and (min-width: 320px) {
+    width: 24px;
+    height: 14px;
+  }
+
+  @media screen and (min-width: 768px) {
+    width: 17px;
+    height: 14px;
+  }
+}
+
+.card-wraper_link {
+  cursor: pointer;
+  outline: none;
+  position: relative;
+  z-index: 0;
+  border-radius: 10px;
+  
+  transition: transform 350ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  &::before {
+    content: '';
+    background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    background-size: 400%;
+    z-index: -1;
+    filter: blur(5px);
+    width: calc(100% + 10px);
+    height: calc(100% + 10px);
+    animation: glowing 20s linear infinite;
+    opacity: 0;
+    transition: opacity .3s ease-in-out;
+    border-radius: 10px;
+
+    @media screen and (min-width: 1200px) {
+        width: calc(100% + 13px);
+        height: calc(100% + 13px);
+      }
+  }
+
+  &:active {
+    color: #000
+  }
+
+  &:active:after {
+    background: transparent;
+  }
+
+  &:hover:before, 
+  &:focus:before {
+    opacity: 1;
+  }
+
+  &:after {
+    z-index: -1;
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #111;
+    left: 0;
+    top: 0;
+    border-radius: 10px;
+  }
+
+  &:hover,
+  &:focus {    
+    .card-img { 
+      filter: saturate(165%);
+      transform: scale(0.97);
+    }
+  }
+}
+
+@keyframes glowing {
+  0% {
+    background-position: 0 0;
+  }
+
+  50% {
+    background-position: 400% 0;
+  }
+
+  100% {
+    background-position: 0 0;
+  }
+}

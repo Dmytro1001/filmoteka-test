@@ -1,0 +1,541 @@
+// Variables //
+:root {
+    // colors
+    --first-text-color: #ffffff;
+    --second-text-color: #000000;
+    --third-text-color: #8c8c8c;
+    --accent-color: #ff6b01;
+    --bg-modal-color: rgba(255, 255, 255, 0.85);
+    --transition-duration-timing-func: 350ms cubic-bezier(0.4, 0, 0.2, 1);
+    --card-set-gap: 30px;
+}
+
+$mobile: 320px;
+$tablet: 768px;
+$desktop: 1024px;
+
+%modal-font {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+}
+
+
+.backdrop-modal {
+    position: fixed;
+    z-index: 999;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.25);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    overflow-y: scroll;
+    transition: opacity var(--transition-duration-timing-func), visibility var(--transition-duration-timing-func);
+
+    @media screen and(max-width: 767px) {
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+    }
+
+    &.is-hidden {
+        opacity: 0;
+        pointer-events: none;
+        visibility: hidden;
+    }
+}
+
+body.modal-open {
+    overflow: hidden;
+}
+
+
+// Movie poster container //
+
+.modal-movie {
+    position: relative;
+    animation: Opacity 1.5s ease alternate;
+    // background-color: rgba(255, 255, 255, 0.88);
+    z-index: 1000;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+
+
+    width: 280px;
+    padding: 48px 20px 40px 20px;
+
+    @media screen and(min-width: $tablet) and(min-height: 430px) {
+        position: absolute;
+        width: 704px;
+
+        top: 0;
+        left: 50%;
+        transform: translate(-50%, 0) scale(1);
+        padding: 40px 30px 40px 36px;
+    }
+
+    @media screen and(min-width: $tablet) {
+        width: 704px;
+        // height: 100;
+        left: 50%;
+        top: 50%;
+
+        transform: translate(-50%, -50%) scale(1);
+
+        padding: 40px 30px 40px 30px;
+    }
+
+    @media screen and(min-width: $desktop) {
+        width: 806px;
+        // padding: 40px 12px 40px 12px;
+    }
+
+    @media screen and(max-height:430px) {
+        height: 99vh;
+        overflow-y: auto;
+    }
+}
+
+
+// Movie content //
+
+.modal-movie-card {
+
+    @media screen and(min-width: $tablet) {
+        display: flex;
+    }
+
+    &__wrappe-img {
+        width: 240px;
+        height: 357px;
+        position: relative;
+
+        @media screen and (min-width: $tablet) {
+            width: 264px;
+            height: 374px;
+            margin-right: 30px;
+            flex-basis: calc((100% / 2) - 34px);
+        }
+
+        @media screen and (min-width: $desktop) {
+            width: 375px;
+            height: 478px;
+            margin-right: 40px;
+            flex-basis: calc((100% / 2) - 52px);
+        }
+    }
+
+    &__image {
+        display: block;
+        width: 100%;
+        height: 100%;
+        border-radius: 5px;
+    }
+}
+
+.modal-movie-data {
+    @media screen and (min-width: $tablet) {
+        flex-basis: calc((100% / 2) - 34px);
+    }
+
+    @media screen and (min-width: $desktop) {
+        flex-basis: calc((100% / 2) - 4px);
+    }
+
+    &__title {
+        font-family: 'Roboto';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 20px;
+        line-height: 1.16;
+        margin-bottom: 20px;
+        margin-top: 20px;
+
+        @media screen and (min-width: $tablet) {
+            margin-top: 0px;
+        }
+
+        @media screen and (min-width: $desktop) {
+            font-size: 30px;
+        }
+    }
+
+    &__list {
+        @extend %modal-font;
+        line-height: 1.33;
+        flex-basis: content;
+        color: var(--third-text-color);
+
+        &>li:not(:last-child) {
+            margin-bottom: 8px;
+        }
+
+        &_right {
+            color: var(--second-text-color);
+            margin-left: 39px;
+            flex-basis: calc(100% - 108px);
+
+            @media screen and(min-width: $tablet) {
+                margin-left: 39px;
+                flex-basis: calc(100% - 108px);
+
+            }
+
+            @media screen and(min-width: $desktop) {
+                margin-left: 83px;
+                flex-basis: calc(100% - 152px);
+            }
+        }
+    }
+
+    &__vote {
+        display: inline-block;
+        text-align: center;
+        width: 36px;
+        height: 16px;
+        background-color: var(--accent-color);
+        color: var(--first-text-color);
+        border-radius: 5px;
+    }
+
+    &__about {
+        @extend %modal-font;
+        line-height: 1.67;
+        color: var(--second-text-color);
+        margin-bottom: 20px;
+
+        &_title {
+            @extend .modal-movie-data__about;
+            line-height: 1.33;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+    }
+
+    &__btn-item {
+        flex-basis: calc((100% / 2) - 10px);
+
+        @media screen and(min-width: $tablet) {
+            flex-basis: calc((100% / 2) - 7px);
+        }
+
+        @media screen and (min-width: $desktop) {
+            flex-basis: content;
+        }
+
+        &:not(:last-child) {
+            margin-right: 12px;
+
+            @media screen and(min-width: $tablet) {
+                margin-right: 15px;
+            }
+        }
+    }
+
+    &__btn-list {
+        display: flex;
+        flex-direction: row;
+        margin-bottom: 0;
+
+        @media screen and (min-width: $desktop) {
+            justify-content: flex-start;
+        }
+    }
+
+    &__btn {
+        @extend %modal-font;
+        line-height: 1.33;
+        text-align: center;
+        text-transform: uppercase;
+        border-radius: 5px;
+        transition: color var(--transition-duration-timing-func), transform var(--transition-duration-timing-func),
+            border-radius var(--transition-duration-timing-func),
+            background-color var(--transition-duration-timing-func);
+
+
+
+
+        &-watched {
+            border: 1px solid var(--second-text-color);
+            height: 50px;
+            width: 114px;
+
+            @media screen and(min-width: $tablet) {
+                height: 50px;
+                width: 170px;
+            }
+        }
+
+        &-queue {
+            height: 50px;
+            width: 114px;
+            border: 1px solid var(--second-text-color);
+
+            @media screen and(min-width: $tablet) {
+                height: 50px;
+                width: 170px;
+            }
+        }
+
+        &.is-hidden-btn {
+            opacity: 0;
+            pointer-events: none;
+            visibility: hidden;
+            display: none;
+        }
+
+        &:hover,
+        &:focus {   
+            color: var(--accent-color);
+            ;
+            transform: scale(1.1);
+            border-radius: 15px;
+            border-color: var(--accent-color);
+        }
+
+        &:focus {
+            outline-width: thick;
+            outline-offset: 4px;
+            outline-color: rgba(255, 107, 1, .6);
+                 }        
+
+        &.active {
+            color: var(--first-text-color);
+            background-color: var(--accent-color);
+
+            &:hover,
+            &:focus {
+                color: var(--first-text-color);
+            }
+        }
+    }
+}
+
+// Button //
+
+.button-close {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    height: 30px;
+    border: 1px solid;
+    border-color: rgba(0, 0, 0, 0.1);
+    top: 0;
+    right: 0;
+    background-color: transparent;
+    border-radius: 50%;
+    margin-top: 8px;
+    margin-right: 8px;
+    transform: scale(1);
+    transition: border-color var(--transition-duration-timing-func),
+        transform var(--transition-duration-timing-func);
+
+    &:hover,
+    &:focus {
+        transform: scale(1.2);
+        border-color: var(--accent-color);
+    }
+
+    &__icon-close {
+        stroke: var(--second-text-color);
+        transition: stroke 250ms cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    &:hover &__icon-close,
+    &:focus &__icon-close {
+        stroke: var(--accent-color);
+    }
+}
+
+
+
+.modal-movie-data-table {
+    margin-bottom: 20px;
+    @extend %modal-font;
+    line-height: 1.33;
+
+    &__row>td:first-child {
+        white-space: nowrap;
+        border-right: 39px solid transparent;
+        color: var(--third-text-color);
+
+        @media screen and(min-width: $desktop) {
+            border-right: 83px solid transparent;
+        }
+    }
+
+    &__row:not(:last-child)>td {
+        border-bottom: 8px solid transparent;
+        background-clip: padding-box;
+    }
+
+    &__row_uk>td:first-child {
+        white-space: normal;
+        border-right: 17px solid transparent;
+        color: var(--third-text-color);
+
+        @media screen and(min-width: $tablet) {
+            border-right: 10px solid transparent;
+        }
+
+        @media screen and(min-width: $tablet) {
+            white-space: nowrap;
+            border-right: 33px solid transparent;
+        }
+    }
+
+    &__row>td {
+        vertical-align: top;
+    }
+
+    & p {
+        margin: 0;
+        padding: 0;
+    }
+}
+
+.trailer-btn-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.trailer-btn {
+
+    @extend %modal-font;
+    line-height: 1.33;
+    text-align: center;
+    text-transform: uppercase;
+    height: 50px;
+    width: 114px;
+    color: var(--first-text-color);
+    background: var(--accent-color);
+    background: linear-gradient(90deg, rgba(255,
+                128, 21, 1) 0%, rgba(255, 107, 1, 1) 100%);
+    border: none;
+    border-radius: 5px;
+    box-shadow: 12px 12px 24px rgba(255, 107, 1, .64);
+    transition: all 0.3s ease-in-out 0s;
+    cursor: pointer;
+    outline: none;
+    position: relative;
+    padding: 10px;
+
+
+
+
+    @media screen and(min-width: $tablet) {
+        height: 50px;
+        width: 170px;
+    }
+
+    &::before {
+        content: '';
+        border-radius: 5px;
+        min-width: calc(119px + 12px);
+        min-height: calc(55px + 12px);
+        border: 6px solid #ff9b06;
+        box-shadow: 0 0 60px rgba(255, 155, 6, .64);
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        opacity: 0;
+        transition: all .3s ease-in-out 0s;
+
+        @media screen and(min-width: $tablet) {
+            min-width: calc(175px + 12px);
+            min-height: calc(55px + 12px);
+        }
+    }
+
+    &:hover::before,
+    &:focus::before {
+        border-radius: 15px;
+        opacity: 1;
+    }
+
+    &::after {
+        content: '';
+        width: 30px;
+        height: 30px;
+        border-radius: 100%;
+        border: 6px solid var(--accent-color);
+        position: absolute;
+        z-index: -1;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        animation: ring 1.5s infinite;
+
+        @media screen and(max-width: 767px) {
+            animation: ring-m 1.5s infinite;
+        }
+
+
+    }
+
+    &:hover::after,
+    &:focus::after {
+        animation: none;
+        display: none;
+    }
+
+
+
+    &:hover,
+    &:focus {
+        color: var(--first-text-color);
+        border-radius: 15px;
+        transform: translateY(-6px);
+    }
+}
+
+@keyframes ring {
+    0% {
+        width: 30px;
+        height: 30px;
+        opacity: 1;
+    }
+
+    100% {
+        width: 300px;
+        height: 200px;
+        opacity: 0;
+    }
+}
+
+@keyframes ring-m {
+    0% {
+        width: 10px;
+        height: 10px;
+        opacity: 1;
+    }
+
+    100% {
+        width: 170px;
+        height: 130px;
+        opacity: 0;
+    }
+}
+
+.disabled {
+    @extend %modal-font;
+        line-height: 1.33;
+        text-align: center;
+        text-transform: uppercase;
+        border-radius: 5px;
+        border: 1px solid var(--second-text-color);
+            height: 50px;
+            width: 114px;
+        
+            @media screen and(min-width: $tablet) {
+                height: 50px;
+                width: 170px;
+            }
+}

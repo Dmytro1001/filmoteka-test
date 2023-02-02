@@ -1,0 +1,85 @@
+.body-theme {
+  --body-theme-color: #e2d2d2;
+}
+
+.footer-theme {
+  // --body-theme-color: #e2d2d2;
+  --body-theme-color: #e6cbcb;
+}
+
+.card-title {
+  filter: invert(0);
+}
+
+.rights-text {
+  filter: invert(0);
+}
+
+.dew-text {
+  filter: invert(0);
+}
+
+.students-text {
+  filter: invert(0);
+}
+
+.modal-movie-data__about {
+  color: #000000;
+}
+
+.modal-movie {
+  --modal-movie-color: rgba(226, 210, 210, 0.88)
+}
+
+.modal-movie-data__title {
+  color: #000000;
+}
+
+.modal-movie-data__list {
+  color: #000000;
+}
+
+.modal-movie-data__right {
+  color: #000000;
+}
+
+.modal-movie-data__vote {
+  color: #000000;
+}
+
+p.modal-movie-data-about {
+  color: #000000;
+}
+
+.modal-movie-data-table td p {
+  color: #000000;
+}
+
+/* Switcher */
+.switcher__radio {
+  filter: invert(0);
+}
+
+.switcher__radio:checked {
+  filter: invert(1);
+}
+
+.switcher__status {
+  filter: invert(0);
+}
+
+.pagination-value {
+  color: #000000;
+}
+
+.pagination .targetPage {
+  color: #ff6b08;
+}
+
+.afterDots {
+  color: #000000;
+}
+
+.preDots {
+  color: #000000;
+}
